@@ -7,7 +7,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <style>
         /* ===== CSS CUSTOM PROPERTIES ===== */
         :root {
@@ -120,6 +119,22 @@
             text-transform: uppercase;
             letter-spacing: 0.1em;
             transition: color var(--transition-fast);
+            white-space: nowrap;
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .mobile-menu-toggle span {
+            width: 28px;
+            height: 3px;
+            background: var(--gold-accent);
+            transition: all var(--transition-fast);
         }
 
         .nav a::after {
@@ -483,53 +498,48 @@
         /* ===== MOBILE RESPONSIVE ===== */
         @media (max-width: 768px) {
             .header {
-                padding: 0 1rem;
-                height: auto;
-                min-height: 64px;
+                padding: 0 var(--spacing-lg);
             }
 
-        @media (max-width: 768px) {
-            .nav {
-                flex-wrap: wrap;
-                justify-content: flex-end;
-                gap: 1rem;
+            .logo {
+                font-size: 1rem;
             }
-        }
 
-        @media (max-width: 768px) {
-            .nav a {
-                font-size: 0.8rem;
-                letter-spacing: 0.05em;
+            .mobile-menu-toggle {
+                display: flex;
             }
-        }
-
-            @media (max-width: 480px) {
-    .header {
-        padding: 0 0.75rem;
-    }
-
-    .logo {
-        font-size: 1rem;
-    }
-
-    .nav {
-        gap: 0.75rem;
-    }
-
-    .nav a {
-        font-size: 0.75rem;
-        letter-spacing: 0.03em;
-    }
-}
-
-         
 
             .nav {
-                gap: var(--spacing-lg);
+                position: fixed;
+                top: 80px;
+                left: 0;
+                right: 0;
+                background: rgba(10, 10, 10, 0.98);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                gap: 0;
+                padding: var(--spacing-lg);
+                transform: translateY(-100%);
+                opacity: 0;
+                transition: all var(--transition-fast);
+                pointer-events: none;
+                border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            }
+
+            .nav.active {
+                transform: translateY(0);
+                opacity: 1;
+                pointer-events: all;
             }
 
             .nav a {
-                font-size: 0.85rem;
+                font-size: 1rem;
+                padding: var(--spacing-md) 0;
+                border-bottom: 1px solid rgba(128, 128, 128, 0.1);
+            }
+
+            .nav a::after {
+                display: none;
             }
 
             .projects-grid {
@@ -555,7 +565,12 @@
         <div class="logo">
             KING'SMIND <span>LABS</span>
         </div>
-        <nav class="nav">
+        <div class="mobile-menu-toggle" id="mobile-menu-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <nav class="nav" id="nav">
             <a href="index.html" class="active">Home</a>
             <a href="about.html">About</a>
             <a href="projects.html">Projects</a>
@@ -658,7 +673,7 @@
         <div class="footer-content">
             <div class="footer-cta">
                 <h3>Let's work together</h3>
-                <a href="mailto:jathnielalexnder041@gmail.com" class="footer-email">jathnielalexnder041@gmail.com</a>
+                <a href="mailto:jathnielalexander041@gmail.com" class="footer-email">jathnielalexander041@gmail.com</a>
             </div>
             <div class="social-links">
                 <a href="#" aria-label="LinkedIn">in</a>
@@ -668,13 +683,37 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>© 2025 KING'SMIND LABS. All rights reserved.</p>
+            <p>© 2026 KING'SMIND LABS. All rights reserved.</p>
             <span class="back-to-top">Back to Top ↑</span>
         </div>
     </footer>
 
     <!-- JAVASCRIPT -->
     <script>
+        // Mobile menu toggle
+        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+        const nav = document.getElementById('nav');
+
+        if (mobileMenuToggle) {
+            mobileMenuToggle.addEventListener('click', () => {
+                nav.classList.toggle('active');
+            });
+
+            // Close menu when clicking on a link
+            nav.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    nav.classList.remove('active');
+                });
+            });
+
+            // Close menu when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!nav.contains(e.target) && !mobileMenuToggle.contains(e.target)) {
+                    nav.classList.remove('active');
+                }
+            });
+        }
+
         // Header scroll behavior
         const header = document.querySelector('.header');
         window.addEventListener('scroll', () => {
@@ -725,7 +764,4 @@
         });
     </script>
 </body>
-
 </html>
-
-
