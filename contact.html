@@ -398,22 +398,66 @@
             transition: color var(--transition-fast);
         }
 
-        .back-to-top:hover {
-            color: var(--gold-hover);
-        }
+            .back-to-top:hover {
+                color: var(--gold-hover);
+            }
+
+            .mobile-menu-toggle {
+                display: none;
+                flex-direction: column;
+                gap: 6px;
+                cursor: pointer;
+                z-index: 1001;
+            }
+
+            .mobile-menu-toggle span {
+                width: 28px;
+                height: 3px;
+                background: var(--gold-accent);
+                transition: all var(--transition-fast);
+            }
 
         @media (max-width: 768px) {
-            .header {
-                padding: 0 var(--spacing-lg);
-            }
+    .logo {
+        font-size: 1rem;
+    }
 
-            .nav {
-                gap: var(--spacing-lg);
-            }
+    .mobile-menu-toggle {
+        display: flex;
+    }
 
-            .nav a {
-                font-size: 0.85rem;
-            }
+    .nav {
+        position: fixed;
+        top: 80px;
+        left: 0;
+        right: 0;
+        background: rgba(10, 10, 10, 0.98);
+        backdrop-filter: blur(10px);
+        flex-direction: column;
+        gap: 0;
+        padding: var(--spacing-lg);
+        transform: translateY(-100%);
+        opacity: 0;
+        transition: all var(--transition-fast);
+        pointer-events: none;
+        border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+    }
+
+    .nav.active {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: all;
+    }
+
+    .nav a {
+        font-size: 1rem;
+        padding: var(--spacing-md) 0;
+        border-bottom: 1px solid rgba(128, 128, 128, 0.1);
+    }
+
+    .nav a::after {
+        display: none;
+    }
 
             .contact-grid {
                 grid-template-columns: 1fr;
@@ -445,6 +489,11 @@
             <a href="projects.html">Projects</a>
             <a href="contact.html" class="active">Contact</a>
         </nav>
+            <div class="mobile-menu-toggle" id="mobile-menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
     </header>
 
     <section class="contact-hero">
@@ -458,7 +507,7 @@
                     <div class="contact-methods">
                         <div class="contact-method">
                             <h3>Email</h3>
-                            <a href="jathnielalexander@gmail.com">jathnielalexander@gmail.com</a>
+                            <a href="mailto:hello@kingsmindlabs.com">hello@kingsmindlabs.com</a>
                         </div>
 
                         <div class="contact-method">
@@ -473,7 +522,7 @@
 
                         <div class="contact-method">
                             <h3>Location</h3>
-                            <p style="color: var(--grey); font-size: 1.125rem;">Abuja, Nigeria</p>
+                            <p style="color: var(--grey); font-size: 1.125rem;">Kaduna, Nigeria</p>
                         </div>
                     </div>
                 </div>
@@ -522,7 +571,7 @@
         <div class="footer-content">
             <div class="footer-cta">
                 <h3>Let's work together</h3>
-                <a href="mailto:jathnielalexander@gmail.com" class="footer-email">jathnielalexander@gmail.com</a>
+                <a href="mailto:hello@kingsmindlabs.com" class="footer-email">hello@kingsmindlabs.com</a>
             </div>
             <div class="social-links">
                 <a href="#" aria-label="LinkedIn">in</a>
@@ -532,7 +581,7 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>© 2025 KING'SMIND LABS. All rights reserved.</p>
+            <p>© 2026 KING'SMIND LABS. All rights reserved.</p>
             <span class="back-to-top">Back to Top ↑</span>
         </div>
     </footer>
@@ -549,6 +598,27 @@
             // If using Formspree, it handles submission automatically
             // Add custom success message or redirect here if needed
         });
+        // Mobile menu toggle
+const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+const nav = document.getElementById('nav');
+
+if (mobileMenuToggle) {
+    mobileMenuToggle.addEventListener('click', () => {
+        nav.classList.toggle('active');
+    });
+
+    nav.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            nav.classList.remove('active');
+        });
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!nav.contains(e.target) && !mobileMenuToggle.contains(e.target)) {
+            nav.classList.remove('active');
+        }
+    });
+}
     </script>
 </body>
 </html>
