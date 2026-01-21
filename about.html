@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - KING'SMIND LABS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --black-primary: #0A0A0A;
+            --black-secondary: #1A1A1A;
+            --gold-accent: #D4AF37;
+            --gold-hover: #F4CF57;
+            --white: #FAFAFA;
+            --grey: #808080;
+            --spacing-xs: 8px;
+            --spacing-sm: 16px;
+            --spacing-md: 24px;
+            --spacing-lg: 32px;
+            --spacing-xl: 48px;
+            --spacing-2xl: 64px;
+            --spacing-3xl: 96px;
+            --spacing-4xl: 128px;
+            --transition-fast: 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+            --transition-smooth: 0.6s cubic-bezier(0.4, 0.0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background-color: var(--black-primary);
+            color: var(--white);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+        }
+
+        p {
+            font-size: 1.125rem;
+            line-height: 1.7;
+            color: rgba(250, 250, 250, 0.85);
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 var(--spacing-2xl);
+            z-index: 1000;
+            background-color: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 800;
+            letter-spacing: 0.05em;
+            color: var(--white);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--gold-accent);
+        }
+
+        .nav {
+            display: flex;
+            gap: var(--spacing-xl);
+        }
+
+        .nav a {
+            position: relative;
+            font-size: 0.95rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: color var(--transition-fast);
+            text-decoration: none;
+            color: var(--white);
+        }
+
+        .nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            width: 0;
+            height: 3px;
+            background: var(--gold-accent);
+            transform: translateX(-50%);
+            transition: width var(--transition-fast);
+        }
+
+        .nav a:hover {
+            color: var(--gold-accent);
+        }
+
+        .nav a:hover::after,
+        .nav a.active::after {
+            width: 100%;
+        }
+
+        .page-hero {
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            margin-top: 80px;
+        }
+
+        .page-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.1) 0%, transparent 70%);
+        }
+
+        .page-hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            padding: 0 var(--spacing-lg);
+        }
+
+        .page-hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .page-hero p {
+            font-size: clamp(1.125rem, 2vw, 1.5rem);
+            color: var(--grey);
+        }
+
+        .content-section {
+            padding: var(--spacing-4xl) var(--spacing-2xl);
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .split-layout {
+            display: grid;
+            grid-template-columns: 60% 40%;
+            gap: var(--spacing-3xl);
+            align-items: center;
+        }
+
+        .content-block h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: var(--spacing-lg);
+            opacity: 0;
+        }
+
+        .content-block p {
+            margin-bottom: var(--spacing-lg);
+            opacity: 0;
+        }
+
+        .content-block.reveal h2,
+        .content-block.reveal p {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .content-block.reveal p:nth-of-type(1) { animation-delay: 0.2s; }
+        .content-block.reveal p:nth-of-type(2) { animation-delay: 0.3s; }
+        .content-block.reveal p:nth-of-type(3) { animation-delay: 0.4s; }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .visual-element {
+            width: 100%;
+            height: 400px;
+            background: var(--black-secondary);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .visual-element::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: 
+                radial-gradient(circle at 30% 30%, rgba(212, 175, 55, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 70% 70%, rgba(212, 175, 55, 0.1) 0%, transparent 50%);
+        }
+
+        .visual-element .logo-mark {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 4rem;
+            font-weight: 800;
+            color: var(--gold-accent);
+            opacity: 0.3;
+        }
+
+        .skills-section {
+            padding: var(--spacing-4xl) var(--spacing-2xl);
+            background: var(--black-secondary);
+        }
+
+        .skills-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .skills-grid h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: var(--spacing-3xl);
+            text-align: center;
+        }
+
+        .skills-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--spacing-xl);
+        }
+
+        .skill-category {
+            padding: var(--spacing-xl);
+            background: var(--black-primary);
+            border-radius: 8px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            transition: all var(--transition-fast);
+            opacity: 0;
+        }
+
+        .skill-category.reveal {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .skill-category:hover {
+            border-color: var(--gold-accent);
+            transform: translateY(-4px);
+        }
+
+        .skill-category h3 {
+            font-size: 1.5rem;
+            margin-bottom: var(--spacing-md);
+            color: var(--gold-accent);
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--spacing-sm);
+        }
+
+        .skill-tag {
+            padding: var(--spacing-xs) var(--spacing-md);
+            background: rgba(212, 175, 55, 0.1);
+            border-radius: 20px;
+            font-size: 0.875rem;
+            color: var(--grey);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .cta-section {
+            padding: var(--spacing-4xl) var(--spacing-2xl);
+            text-align: center;
+        }
+
+        .cta-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta-content h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .cta-content p {
+            margin-bottom: var(--spacing-xl);
+            font-size: 1.25rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 18px 48px;
+            border: 2px solid var(--gold-accent);
+            background: transparent;
+            color: var(--gold-accent);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            text-decoration: none;
+        }
+
+        .cta-button:hover {
+            background: var(--gold-accent);
+            color: var(--black-primary);
+            transform: scale(1.02);
+            box-shadow: 0 8px 30px rgba(212, 175, 55, 0.3);
+        }
+
+        .footer {
+            background: var(--black-primary);
+            padding: var(--spacing-3xl) var(--spacing-2xl);
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: var(--spacing-xl);
+        }
+
+        .footer-cta h3 {
+            font-size: 1.5rem;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .footer-email {
+            color: var(--gold-accent);
+            font-size: 1.125rem;
+            text-decoration: none;
+            transition: color var(--transition-fast);
+        }
+
+        .footer-email:hover {
+            color: var(--gold-hover);
+        }
+
+        .social-links {
+            display: flex;
+            gap: var(--spacing-lg);
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid var(--grey);
+            border-radius: 50%;
+            color: var(--grey);
+            text-decoration: none;
+            transition: all var(--transition-fast);
+        }
+
+        .social-links a:hover {
+            border-color: var(--gold-accent);
+            color: var(--gold-accent);
+            transform: translateY(-4px);
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: var(--spacing-xl) auto 0;
+            padding-top: var(--spacing-lg);
+            border-top: 1px solid rgba(128, 128, 128, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.875rem;
+            color: var(--grey);
+        }
+
+        .back-to-top {
+            color: var(--gold-accent);
+            font-weight: 600;
+            cursor: pointer;
+            transition: color var(--transition-fast);
+        }
+
+        .back-to-top:hover {
+            color: var(--gold-hover);
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 0 var(--spacing-lg);
+            }
+
+            .nav {
+                gap: var(--spacing-lg);
+            }
+
+            .nav a {
+                font-size: 0.85rem;
+            }
+
+            .split-layout {
+                grid-template-columns: 1fr;
+                gap: var(--spacing-xl);
+            }
+
+            .visual-element {
+                height: 300px;
+            }
+
+            .skills-categories {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: var(--spacing-md);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="index.html" class="logo">KING'SMIND <span>LABS</span></a>
+        <nav class="nav">
+            <a href="index.html">Home</a>
+            <a href="about.html" class="active">About</a>
+            <a href="projects.html">Projects</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </header>
+
+    <section class="page-hero">
+        <div class="page-hero-content">
+            <h1>Design is intentional storytelling</h1>
+            <p>Every project is an opportunity to solve problems creatively and push visual boundaries.</p>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="section-inner">
+            <div class="split-layout">
+                <div class="content-block">
+                    <h2>The Philosophy</h2>
+                    <p>I build experiences that bridge code and creativity. Whether it's developing a full-stack web application, editing a cinematic video, or designing a complete brand identity, the foundation is always the same: clarity of purpose, attention to detail, and emotional resonance.</p>
+                    <p>My approach combines technical precision with creative intuition. From frontend interfaces to backend systems, from motion graphics to brand strategy—I don't just execute, I collaborate, refine, and iterate until the work speaks for itself.</p>
+                    <p>Every line of code, every frame, every color, every transition serves the bigger picture.</p>
+                </div>
+                <div class="visual-element">
+                    <span class="logo-mark">KM</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="skills-section">
+        <div class="skills-grid">
+            <h2>Skills & Expertise</h2>
+            <div class="skills-categories">
+                <div class="skill-category">
+                    <h3>Frontend Development</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">HTML5 & CSS3</span>
+                        <span class="skill-tag">JavaScript (ES6+)</span>
+                        <span class="skill-tag">React.js</span>
+                        <span class="skill-tag">Tailwind CSS</span>
+                        <span class="skill-tag">Responsive Design</span>
+                        <span class="skill-tag">UI/UX Implementation</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Backend Development</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Node.js</span>
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">Express.js</span>
+                        <span class="skill-tag">RESTful APIs</span>
+                        <span class="skill-tag">Database Design</span>
+                        <span class="skill-tag">MongoDB / SQL</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Video Editing</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Adobe Premiere Pro</span>
+                        <span class="skill-tag">DaVinci Resolve</span>
+                        <span class="skill-tag">After Effects</span>
+                        <span class="skill-tag">Color Grading</span>
+                        <span class="skill-tag">Sound Design</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Motion Graphics</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">After Effects</span>
+                        <span class="skill-tag">Cinema 4D</span>
+                        <span class="skill-tag">2D Animation</span>
+                        <span class="skill-tag">Typography</span>
+                        <span class="skill-tag">VFX</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Graphic Design</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Adobe Illustrator</span>
+                        <span class="skill-tag">Photoshop</span>
+                        <span class="skill-tag">Figma</span>
+                        <span class="skill-tag">Print Design</span>
+                        <span class="skill-tag">Digital Assets</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Brand Design</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Logo Design</span>
+                        <span class="skill-tag">Brand Identity</span>
+                        <span class="skill-tag">Style Guides</span>
+                        <span class="skill-tag">Marketing Collateral</span>
+                        <span class="skill-tag">Social Media</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2>Ready to collaborate?</h2>
+            <p>I'm always open to new projects, creative challenges, and opportunities to bring ideas to life.</p>
+            <a href="contact.html" class="cta-button">Get in Touch</a>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-cta">
+                <h3>Let's work together</h3>
+                <a href="mailto:jathnielalexnder041@gmail.com" class="footer-email">jathnielalexnder041@gmail.com</a>
+            </div>
+            <div class="social-links">
+                <a href="#" aria-label="LinkedIn">in</a>
+                <a href="#" aria-label="Behance">Be</a>
+                <a href="#" aria-label="Instagram">ig</a>
+                <a href="#" aria-label="YouTube">yt</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 KING'SMIND LABS. All rights reserved.</p>
+            <span class="back-to-top">Back to Top ↑</span>
+        </div>
+    </footer>
+
+    <script>
+        // Intersection Observer for scroll reveals
+        const observerOptions = {
+            threshold: 0.2,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('reveal');
+                }
+            });
+        }, observerOptions);
+
+        // Observe content blocks and skill categories
+        document.querySelectorAll('.content-block, .skill-category').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Back to top functionality
+        document.querySelector('.back-to-top').addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>

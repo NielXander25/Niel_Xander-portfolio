@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - KING'SMIND LABS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --black-primary: #0A0A0A;
+            --black-secondary: #1A1A1A;
+            --gold-accent: #D4AF37;
+            --gold-hover: #F4CF57;
+            --white: #FAFAFA;
+            --grey: #808080;
+            --spacing-xs: 8px;
+            --spacing-sm: 16px;
+            --spacing-md: 24px;
+            --spacing-lg: 32px;
+            --spacing-xl: 48px;
+            --spacing-2xl: 64px;
+            --spacing-3xl: 96px;
+            --spacing-4xl: 128px;
+            --transition-fast: 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+            --transition-smooth: 0.6s cubic-bezier(0.4, 0.0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background-color: var(--black-primary);
+            color: var(--white);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+        }
+
+        p {
+            font-size: 1.125rem;
+            line-height: 1.7;
+            color: rgba(250, 250, 250, 0.85);
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 var(--spacing-2xl);
+            z-index: 1000;
+            background-color: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 800;
+            letter-spacing: 0.05em;
+            color: var(--white);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--gold-accent);
+        }
+
+        .nav {
+            display: flex;
+            gap: var(--spacing-xl);
+        }
+
+        .nav a {
+            position: relative;
+            font-size: 0.95rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: color var(--transition-fast);
+            text-decoration: none;
+            color: var(--white);
+        }
+
+        .nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            width: 0;
+            height: 3px;
+            background: var(--gold-accent);
+            transform: translateX(-50%);
+            transition: width var(--transition-fast);
+        }
+
+        .nav a:hover {
+            color: var(--gold-accent);
+        }
+
+        .nav a:hover::after,
+        .nav a.active::after {
+            width: 100%;
+        }
+
+        .contact-hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: var(--spacing-4xl) var(--spacing-lg);
+            margin-top: 80px;
+        }
+
+        .contact-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 30% 30%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 70% 70%, rgba(212, 175, 55, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .contact-content {
+            max-width: 1200px;
+            width: 100%;
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 45% 55%;
+            gap: var(--spacing-3xl);
+            align-items: start;
+        }
+
+        .contact-info h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: var(--spacing-lg);
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.2s forwards;
+        }
+
+        .contact-info p {
+            font-size: 1.25rem;
+            margin-bottom: var(--spacing-3xl);
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.4s forwards;
+        }
+
+        .contact-methods {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-xl);
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.6s forwards;
+        }
+
+        .contact-method {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-sm);
+        }
+
+        .contact-method h3 {
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--grey);
+            font-weight: 600;
+        }
+
+        .contact-method a {
+            font-size: 1.5rem;
+            color: var(--gold-accent);
+            text-decoration: none;
+            transition: color var(--transition-fast);
+            font-weight: 600;
+        }
+
+        .contact-method a:hover {
+            color: var(--gold-hover);
+        }
+
+        .social-list {
+            display: flex;
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-md);
+        }
+
+        .social-list a {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid var(--grey);
+            border-radius: 50%;
+            color: var(--grey);
+            text-decoration: none;
+            font-size: 1.125rem;
+            transition: all var(--transition-fast);
+        }
+
+        .social-list a:hover {
+            border-color: var(--gold-accent);
+            color: var(--gold-accent);
+            transform: translateY(-4px);
+        }
+
+        .contact-form-wrapper {
+            background: var(--black-secondary);
+            padding: var(--spacing-3xl);
+            border-radius: 12px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.8s forwards;
+        }
+
+        .contact-form h2 {
+            font-size: 2rem;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .form-group {
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: var(--spacing-sm);
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--grey);
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: var(--spacing-md);
+            background: var(--black-primary);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 6px;
+            color: var(--white);
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            transition: all var(--transition-fast);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--gold-accent);
+            background: rgba(212, 175, 55, 0.05);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .submit-button {
+            width: 100%;
+            padding: 18px;
+            border: 2px solid var(--gold-accent);
+            background: transparent;
+            color: var(--gold-accent);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: all var(--transition-fast);
+        }
+
+        .submit-button:hover {
+            background: var(--gold-accent);
+            color: var(--black-primary);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(212, 175, 55, 0.3);
+        }
+
+        .submit-button:active {
+            transform: translateY(0);
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .footer {
+            background: var(--black-primary);
+            padding: var(--spacing-3xl) var(--spacing-2xl);
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: var(--spacing-xl);
+        }
+
+        .footer-cta h3 {
+            font-size: 1.5rem;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .footer-email {
+            color: var(--gold-accent);
+            font-size: 1.125rem;
+            text-decoration: none;
+            transition: color var(--transition-fast);
+        }
+
+        .footer-email:hover {
+            color: var(--gold-hover);
+        }
+
+        .social-links {
+            display: flex;
+            gap: var(--spacing-lg);
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid var(--grey);
+            border-radius: 50%;
+            color: var(--grey);
+            text-decoration: none;
+            transition: all var(--transition-fast);
+        }
+
+        .social-links a:hover {
+            border-color: var(--gold-accent);
+            color: var(--gold-accent);
+            transform: translateY(-4px);
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: var(--spacing-xl) auto 0;
+            padding-top: var(--spacing-lg);
+            border-top: 1px solid rgba(128, 128, 128, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.875rem;
+            color: var(--grey);
+        }
+
+        .back-to-top {
+            color: var(--gold-accent);
+            font-weight: 600;
+            cursor: pointer;
+            transition: color var(--transition-fast);
+        }
+
+        .back-to-top:hover {
+            color: var(--gold-hover);
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 0 var(--spacing-lg);
+            }
+
+            .nav {
+                gap: var(--spacing-lg);
+            }
+
+            .nav a {
+                font-size: 0.85rem;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: var(--spacing-2xl);
+            }
+
+            .contact-form-wrapper {
+                padding: var(--spacing-lg);
+            }
+
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: var(--spacing-md);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="index.html" class="logo">KING'SMIND <span>LABS</span></a>
+        <nav class="nav">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="projects.html">Projects</a>
+            <a href="contact.html" class="active">Contact</a>
+        </nav>
+    </header>
+
+    <section class="contact-hero">
+        <div class="contact-content">
+            <div class="contact-grid">
+                <!-- LEFT: CONTACT INFO -->
+                <div class="contact-info">
+                    <h1>Let's Create Something</h1>
+                    <p>Available for freelance projects, collaborations, and creative opportunities.</p>
+
+                    <div class="contact-methods">
+                        <div class="contact-method">
+                            <h3>Email</h3>
+                            <a href="jathnielalexander@gmail.com">jathnielalexander@gmail.com</a>
+                        </div>
+
+                        <div class="contact-method">
+                            <h3>Connect</h3>
+                            <div class="social-list">
+                                <a href="#" aria-label="LinkedIn">in</a>
+                                <a href="#" aria-label="Behance">Be</a>
+                                <a href="#" aria-label="Instagram">ig</a>
+                                <a href="#" aria-label="YouTube">yt</a>
+                            </div>
+                        </div>
+
+                        <div class="contact-method">
+                            <h3>Location</h3>
+                            <p style="color: var(--grey); font-size: 1.125rem;">Abuja, Nigeria</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RIGHT: CONTACT FORM -->
+                <div class="contact-form-wrapper">
+                    <div class="contact-form">
+                        <h2>Send a Message</h2>
+                        <form action="https://formspree.io/f/mnjjgdbv" method="POST">
+                            <div class="form-group">
+                                <label for="name">Your Name</label>
+                                <input type="text" id="name" name="name" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="project-type">Project Type</label>
+                                <select id="project-type" name="project-type">
+                                    <option value="">Select a project type</option>
+                                    <option value="video-editing">Video Editing</option>
+                                    <option value="motion-graphics">Motion Graphics</option>
+                                    <option value="graphic-design">Graphic Design</option>
+                                    <option value="brand-design">Brand Design</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="message">Project Details</label>
+                                <textarea id="message" name="message" required></textarea>
+                            </div>
+
+                            <button type="submit" class="submit-button">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-cta">
+                <h3>Let's work together</h3>
+                <a href="mailto:jathnielalexander@gmail.com" class="footer-email">jathnielalexander@gmail.com</a>
+            </div>
+            <div class="social-links">
+                <a href="#" aria-label="LinkedIn">in</a>
+                <a href="#" aria-label="Behance">Be</a>
+                <a href="#" aria-label="Instagram">ig</a>
+                <a href="#" aria-label="YouTube">yt</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 KING'SMIND LABS. All rights reserved.</p>
+            <span class="back-to-top">Back to Top ↑</span>
+        </div>
+    </footer>
+
+    <script>
+        // Back to top functionality
+        document.querySelector('.back-to-top').addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Form submission handling
+        const form = document.querySelector('form');
+        form.addEventListener('submit', (e) => {
+            // If using Formspree, it handles submission automatically
+            // Add custom success message or redirect here if needed
+        });
+    </script>
+</body>
+</html>

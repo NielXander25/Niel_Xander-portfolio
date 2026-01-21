@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects - KING'SMIND LABS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --black-primary: #0A0A0A;
+            --black-secondary: #1A1A1A;
+            --gold-accent: #D4AF37;
+            --gold-hover: #F4CF57;
+            --white: #FAFAFA;
+            --grey: #808080;
+            --spacing-xs: 8px;
+            --spacing-sm: 16px;
+            --spacing-md: 24px;
+            --spacing-lg: 32px;
+            --spacing-xl: 48px;
+            --spacing-2xl: 64px;
+            --spacing-3xl: 96px;
+            --spacing-4xl: 128px;
+            --transition-fast: 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+            --transition-smooth: 0.6s cubic-bezier(0.4, 0.0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background-color: var(--black-primary);
+            color: var(--white);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 var(--spacing-2xl);
+            z-index: 1000;
+            background-color: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 800;
+            letter-spacing: 0.05em;
+            color: var(--white);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--gold-accent);
+        }
+
+        .nav {
+            display: flex;
+            gap: var(--spacing-xl);
+        }
+
+        .nav a {
+            position: relative;
+            font-size: 0.95rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: color var(--transition-fast);
+            text-decoration: none;
+            color: var(--white);
+        }
+
+        .nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            width: 0;
+            height: 3px;
+            background: var(--gold-accent);
+            transform: translateX(-50%);
+            transition: width var(--transition-fast);
+        }
+
+        .nav a:hover {
+            color: var(--gold-accent);
+        }
+
+        .nav a:hover::after,
+        .nav a.active::after {
+            width: 100%;
+        }
+
+        .page-hero {
+            height: 50vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            margin-top: 80px;
+        }
+
+        .page-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.1) 0%, transparent 70%);
+        }
+
+        .page-hero h1 {
+            font-size: clamp(3rem, 6vw, 4.5rem);
+            position: relative;
+            z-index: 1;
+        }
+
+        .section-nav {
+            position: sticky;
+            top: 80px;
+            z-index: 100;
+            background: rgba(10, 10, 10, 0.98);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            padding: var(--spacing-lg) var(--spacing-2xl);
+        }
+
+        .section-nav-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            gap: var(--spacing-xl);
+        }
+
+        .section-nav a {
+            position: relative;
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--grey);
+            text-decoration: none;
+            transition: color var(--transition-fast);
+        }
+
+        .section-nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -var(--spacing-lg);
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--gold-accent);
+            transition: width var(--transition-fast);
+        }
+
+        .section-nav a:hover,
+        .section-nav a.active {
+            color: var(--gold-accent);
+        }
+
+        .section-nav a.active::after {
+            width: 100%;
+        }
+
+        .horizontal-section {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: var(--spacing-3xl) 0;
+            overflow: hidden;
+        }
+
+        .section-header {
+            position: absolute;
+            top: var(--spacing-3xl);
+            left: var(--spacing-2xl);
+            z-index: 10;
+        }
+
+        .section-header h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .scroll-hint {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            color: var(--grey);
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-top: var(--spacing-md);
+        }
+
+        .scroll-hint svg {
+            width: 24px;
+            height: 24px;
+            animation: scrollHint 2s ease-in-out infinite;
+        }
+
+        @keyframes scrollHint {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(8px); }
+        }
+
+        .progress-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: var(--gold-accent);
+            width: 0;
+            transition: width 0.1s linear;
+            z-index: 10;
+        }
+
+        .scroll-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            padding: 120px var(--spacing-2xl) var(--spacing-2xl);
+        }
+
+        .cards-wrapper {
+            display: flex;
+            gap: var(--spacing-lg);
+            transition: transform 0.3s ease-out;
+            will-change: transform;
+        }
+
+        .horizontal-section::before,
+        .horizontal-section::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 80px;
+            z-index: 5;
+            pointer-events: none;
+        }
+
+        .horizontal-section::before {
+            left: 0;
+            background: linear-gradient(to right, var(--black-primary) 0%, transparent 100%);
+        }
+
+        .horizontal-section::after {
+            right: 0;
+            background: linear-gradient(to left, var(--black-primary) 0%, transparent 100%);
+        }
+
+        .video-card,
+        .graphics-card {
+            background: var(--black-secondary);
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform var(--transition-fast);
+            position: relative;
+        }
+
+        .video-card {
+            flex: 0 0 420px;
+            height: 560px;
+        }
+
+        .graphics-card {
+            flex: 0 0 420px;
+            height: 580px;
+        }
+
+        .video-card:hover,
+        .graphics-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .video-card::before,
+        .graphics-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border: 1px solid transparent;
+            border-radius: 8px;
+            transition: border-color var(--transition-fast);
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .video-card:hover::before,
+        .graphics-card:hover::before {
+            border-color: var(--gold-accent);
+        }
+
+        .video-thumbnail,
+        .graphics-preview {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .video-thumbnail {
+            height: 280px;
+        }
+
+        .graphics-preview {
+            height: 420px;
+        }
+
+        .video-thumbnail img,
+        .graphics-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform var(--transition-smooth);
+        }
+
+        .video-card:hover .video-thumbnail img,
+        .graphics-card:hover .graphics-preview img {
+            transform: scale(1.05);
+        }
+
+        .video-thumbnail::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(10, 10, 10, 0.8) 0%, transparent 60%);
+        }
+
+        .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+            border: 3px solid var(--gold-accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold-accent);
+            font-size: 2rem;
+            z-index: 3;
+            transition: all var(--transition-fast);
+            background: rgba(10, 10, 10, 0.6);
+            backdrop-filter: blur(5px);
+        }
+
+        .video-card:hover .play-button {
+            transform: translate(-50%, -50%) scale(1.1);
+            background: rgba(212, 175, 55, 0.2);
+        }
+
+        .video-info,
+        .graphics-info {
+            padding: var(--spacing-lg);
+        }
+
+        .video-info h3,
+        .graphics-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .video-meta {
+            display: flex;
+            gap: var(--spacing-md);
+            align-items: center;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .video-category {
+            color: var(--gold-accent);
+            font-weight: 600;
+        }
+
+        .video-duration {
+            color: var(--grey);
+        }
+
+        .video-description {
+            font-size: 0.95rem;
+            color: rgba(250, 250, 250, 0.7);
+            line-height: 1.6;
+        }
+
+        .graphics-meta {
+            font-size: 0.875rem;
+            color: var(--grey);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .graphics-meta span {
+            color: var(--gold-accent);
+        }
+
+        .modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: var(--spacing-xl);
+            opacity: 0;
+            transition: opacity var(--transition-fast);
+        }
+
+        .modal.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-content {
+            max-width: 1200px;
+            width: 100%;
+            background: var(--black-secondary);
+            border-radius: 12px;
+            overflow: hidden;
+            transform: scale(0.9);
+            transition: transform var(--transition-fast);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal.active .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-close {
+            position: fixed;
+            top: var(--spacing-xl);
+            right: var(--spacing-xl);
+            width: 50px;
+            height: 50px;
+            border: 2px solid var(--gold-accent);
+            background: transparent;
+            color: var(--gold-accent);
+            font-size: 1.5rem;
+            cursor: pointer;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all var(--transition-fast);
+            z-index: 2001;
+        }
+
+        .modal-close:hover {
+            background: var(--gold-accent);
+            color: var(--black-primary);
+            transform: rotate(90deg);
+        }
+
+        .modal-video {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            background: #000;
+        }
+
+        .modal-video iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .modal-image {
+            width: 100%;
+            max-height: 70vh;
+            object-fit: contain;
+            background: var(--black-primary);
+        }
+
+        .modal-info {
+            padding: var(--spacing-2xl);
+        }
+
+        .modal-info h2 {
+            font-size: 2rem;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .modal-info .meta {
+            display: flex;
+            gap: var(--spacing-xl);
+            margin-bottom: var(--spacing-lg);
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            flex-wrap: wrap;
+        }
+
+        .modal-info .meta span {
+            color: var(--grey);
+        }
+
+        .modal-info .meta strong {
+            color: var(--gold-accent);
+            font-weight: 600;
+        }
+
+        .modal-info p {
+            font-size: 1.125rem;
+            line-height: 1.7;
+            color: rgba(250, 250, 250, 0.85);
+        }
+
+        .footer {
+            background: var(--black-primary);
+            padding: var(--spacing-3xl) var(--spacing-2xl);
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: var(--spacing-xl);
+        }
+
+        .footer-cta h3 {
+            font-size: 1.5rem;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .footer-email {
+            color: var(--gold-accent);
+            font-size: 1.125rem;
+            text-decoration: none;
+            transition: color var(--transition-fast);
+        }
+
+        .footer-email:hover {
+            color: var(--gold-hover);
+        }
+
+        .social-links {
+            display: flex;
+            gap: var(--spacing-lg);
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid var(--grey);
+            border-radius: 50%;
+            color: var(--grey);
+            text-decoration: none;
+            transition: all var(--transition-fast);
+        }
+
+        .social-links a:hover {
+            border-color: var(--gold-accent);
+            color: var(--gold-accent);
+            transform: translateY(-4px);
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: var(--spacing-xl) auto 0;
+            padding-top: var(--spacing-lg);
+            border-top: 1px solid rgba(128, 128, 128, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.875rem;
+            color: var(--grey);
+        }
+
+        .back-to-top {
+            color: var(--gold-accent);
+            font-weight: 600;
+            cursor: pointer;
+            transition: color var(--transition-fast);
+        }
+
+        .back-to-top:hover {
+            color: var(--gold-hover);
+        }
+
+        @media (max-width: 768px) {
+            .header,
+            .section-nav {
+                padding: 0 var(--spacing-lg);
+            }
+
+            .nav {
+                gap: var(--spacing-lg);
+            }
+
+            .nav a {
+                font-size: 0.85rem;
+            }
+
+            .section-header {
+                left: var(--spacing-lg);
+            }
+
+            .horizontal-section {
+                overflow-x: auto;
+                overflow-y: hidden;
+                scroll-snap-type: x mandatory;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .scroll-container {
+                padding: 120px var(--spacing-lg) var(--spacing-lg);
+            }
+
+            .cards-wrapper {
+                transform: none !important;
+            }
+
+            .video-card,
+            .graphics-card {
+                scroll-snap-align: center;
+                flex: 0 0 340px;
+            }
+
+            .modal-content {
+                max-width: 95%;
+            }
+
+            .modal-info {
+                padding: var(--spacing-lg);
+            }
+
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: var(--spacing-md);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="index.html" class="logo">KING'SMIND <span>LABS</span></a>
+        <nav class="nav">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="projects.html" class="active">Projects</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </header>
+
+    <section class="page-hero">
+        <h1>Portfolio</h1>
+    </section>
+
+    <nav class="section-nav">
+        <div class="section-nav-inner">
+            <a href="#video-projects" class="active section-link">Video</a>
+            <a href="#web-projects" class="section-link">Web Design</a>
+            <a href="#graphics-projects" class="section-link">Graphics</a>
+        </div>
+    </nav>
+
+    <!-- VIDEO PROJECTS SECTION -->
+    <section class="horizontal-section" id="video-projects">
+        <div class="progress-bar" id="video-progress"></div>
+        <div class="section-header">
+            <h2>Video Projects</h2>
+            <div class="scroll-hint">
+                <span>Scroll to explore</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+            </div>
+        </div>
+        <div class="scroll-container">
+            <div class="cards-wrapper" id="video-wrapper">
+                <div class="video-card" data-video-id="dQw4w9WgXcQ" data-title="Brand Story Campaign" data-category="Commercial Video" data-duration="2:30" data-description="A cinematic brand story showcasing the evolution of a tech startup from garage to global presence. Shot on location across 3 continents with a focus on authentic storytelling.">
+                    <div class="video-thumbnail">
+                        <img src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=800&h=450&fit=crop" alt="Brand Story">
+                        <div class="play-button">▶</div>
+                    </div>
+                    <div class="video-info">
+                        <h3>Brand Story Campaign</h3>
+                        <div class="video-meta">
+                            <span class="video-category">Commercial</span>
+                            <span class="video-duration">• 2:30</span>
+                        </div>
+                        <p class="video-description">Cinematic storytelling across continents.</p>
+                    </div>
+                </div>
+
+                <div class="video-card" data-video-id="dQw4w9WgXcQ" data-title="Product Launch Video" data-category="Motion Graphics" data-duration="1:45" data-description="High-energy product reveal featuring 3D product animations, dynamic typography, and sleek transitions timed to an electronic soundtrack.">
+                    <div class="video-thumbnail">
+                        <img src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=800&h=450&fit=crop" alt="Product Launch">
+                        <div class="play-button">▶</div>
+                    </div>
+                    <div class="video-info">
+                        <h3>Product Launch Video</h3>
+                        <div class="video-meta">
+                            <span class="video-category">Motion Graphics</span>
+                            <span class="video-duration">• 1:45</span>
+                        </div>
+                        <p class="video-description">3D animations with dynamic transitions.</p>
+                    </div>
+                </div>
+
+                <div class="video-card" data-video-id="dQw4w9WgXcQ" data-title="Documentary Short" data-category="Editorial Video" data-duration="5:20" data-description="Interview-based documentary exploring the creative process of three visual artists. Color graded for cinematic feel with natural lighting.">
+                    <div class="video-thumbnail">
+                        <img src="https://images.unsplash.com/photo-1536240478700-b869070f9279?w=800&h=450&fit=crop" alt="Documentary">
+                        <div class="play-button">▶</div>
+                    </div>
+                    <div class="video-info">
+                        <h3>Documentary Short</h3>
+                        <div class="video-meta">
+                            <span class="video-category">Editorial</span>
+                            <span class="video-duration">• 5:20</span>
+                        </div>
+                        <p class="video-description">Exploring creative processes.</p>
+                    </div>
+                </div>
+
+                <div class="video-card" data-video-id="dQw4w9WgXcQ" data-title="Social Media Campaign" data-category="Short Form Content" data-duration="0:30" data-description="Fast-paced vertical video optimized for Instagram Reels and TikTok. Bold cuts, trending audio, and text overlays.">
+                    <div class="video-thumbnail">
+                        <img src="https://images.unsplash.com/photo-1551818255-e6e10975bc17?w=800&h=450&fit=crop" alt="Social Campaign">
+                        <div class="play-button">▶</div>
+                    </div>
+                    <div class="video-info">
+                        <h3>Social Media Campaign</h3>
+                        <div class="video-meta">
+                            <span class="video-category">Short Form</span>
+                            <span class="video-duration">• 0:30</span>
+                        </div>
+                        <p class="video-description">Optimized for social platforms.</p>
+                    </div>
+                </div>
+
+                <div class="video-card" data-video-id="dQw4w9WgXcQ" data-title="Event Recap" data-category="Event Video" data-duration="3:15" data-description="Multi-camera event coverage with drone footage, audience reactions, and keynote highlights.">
+                    <div class="video-thumbnail">
+                        <img src="https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=800&h=450&fit=crop" alt="Event Recap">
+                        <div class="play-button">▶</div>
+                    </div>
+                    <div class="video-info">
+                        <h3>Event Recap</h3>
+                        <div class="video-meta">
+                            <span class="video-category">Event</span>
+                            <span class="video-duration">• 3:15</span>
+                        </div>
+                        <p class="video-description">Multi-camera with drone footage.</p>
+                    </div>
+                </div>
+
+                <div class="video-card" data-video-id="dQw4w9WgXcQ" data-title="Music Video" data-category="Creative Video" data-duration="4:00" data-description="Narrative-driven music video with color-coordinated sets and choreographed movements.">
+                    <div class="video-thumbnail">
+                        <img src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=800&h=450&fit=crop" alt="Music Video">
+                        <div class="play-button">▶</div>
+                    </div>
+                    <div class="video-info">
+                        <h3>Music Video</h3>
+                        <div class="video-meta">
+                            <span class="video-category">Creative</span>
+                            <span class="video-duration">• 4:00</span>
+                        </div>
+                        <p class="video-description">Narrative-driven with choreography.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WEB DEVELOPMENT PROJECTS SECTION -->
+    <section class="horizontal-section" id="web-projects">
+        <div class="progress-bar" id="web-progress"></div>
+        <div class="section-header">
+            <h2>Web Design & Development</h2>
+            <div class="scroll-hint">
+                <span>Scroll to explore</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+            </div>
+        </div>
+        <div class="scroll-container">
+            <div class="cards-wrapper" id="web-wrapper">
+                <div class="graphics-card" data-image="https://images.unsplash.com/photo-1547658719-da2b51169166?w=800&h=1200&fit=crop" data-title="E-Commerce Platform" data-client="Fashion Retailer" data-year="2024" data-description="Full-stack e-commerce solution built with React, Node.js, and MongoDB. Features include user authentication, shopping cart, payment integration, and admin dashboard.">
+                    <div class="graphics-preview">
+                        <img src="https://images.unsplash.com/photo-1547658719-da2b51169166?w=800&h=1200&fit=crop" alt="E-Commerce Platform">
+                    </div>
+                    <div class="graphics-info">
+                        <h3>E-Commerce Platform</h3>
+                        <p class="graphics-meta"><span>Fashion Retailer</span> · 2024</p>
+                    </div>
+                </div>
+
+                <div class="graphics-card" data-image="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=1200&fit=crop" data-title="SaaS Dashboard" data-client="Analytics Startup" data-year="2024" data-description="Real-time analytics dashboard with interactive charts, data visualization, and customizable widgets. Built with React, D3.js, and Express backend.">
+                    <div class="graphics-preview">
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=1200&fit=crop" alt="SaaS Dashboard">
+                    </div>
+                    <div class="graphics-info">
+                        <h3>SaaS Dashboard</h3>
+                        <p class="graphics-meta"><span>Analytics Startup</span> · 2024</p>
+                    </div>
+                </div>
+
+                <div class="graphics-card" data-image="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=800&h=1200&fit=crop" data-title="Portfolio Website" data-client="Creative Agency" data-year="2024" data-description="Modern, responsive portfolio website with smooth animations, case study pages, and integrated blog. Custom CMS for easy content updates.">
+                    <div class="graphics-preview">
+                        <img src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=800&h=1200&fit=crop" alt="Portfolio Website">
+                    </div>
+                    <div class="graphics-info">
+                        <h3>Portfolio Website</h3>
+                        <p class="graphics-meta"><span>Creative Agency</span> · 2024</p>
+                    </div>
+                </div>
+
+                <div class="graphics-card" data-image="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&h=1200&fit=crop" data-title="Mobile App Landing Page" data-client="Tech Startup" data-year="2023" data-description="High-converting landing page with parallax scrolling, animated statistics, and email capture. Optimized for performance and SEO.">
+                    <div class="graphics-preview">
+                        <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&h=1200&fit=crop" alt="Landing Page">
+                    </div>
+                    <div class="graphics-info">
+                        <h3>Mobile App Landing Page</h3>
+                        <p class="graphics-meta"><span>Tech Startup</span> · 2023</p>
+                    </div>
+                </div>
+
+                <div class="graphics-card" data-image="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&h=1200&fit=crop" data-title="Booking System" data-client="Hotel Chain" data-year="2023" data-description="Real-time room booking platform with calendar integration, payment processing, and automated email confirmations. Multi-property support.">
+                    <div class="graphics-preview">
+                        <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&h=1200&fit=crop" alt="Booking System">
+                    </div>
+                    <div class="graphics-info">
+                        <h3>Booking System</h3>
+                        <p class="graphics-meta"><span>Hotel Chain</span> · 2023</p>
+                    </div>
+                </div>
+
+                <div class="graphics-card" data-image="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800&h=1200&fit=crop" data-title="Social Media Platform" data-client="Community Project" data-year="2024" data-description="Niche social network with real-time messaging, content feeds, and user profiles. Built with React, Socket.io, and PostgreSQL.">
+                    <div class="graphics-preview">
+                        <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800&h=1200&fit=crop" alt="Social Platform">
+                    </div>
+                    <div class="graphics-info">
+                        <h3>Social Media Platform</h3>
+                        <p class="graphics-meta"><span>Community Project</span> · 2024</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GRAPHICS PROJECTS SECTION -->
+    <section class="horizontal-section" id="graphics-projects">
+        <div class="progress-bar" id="graphics-progress"></div>
+        <div class="section-header">
+            <h2>Graphics & Design</h2>
+            <div class="scroll-hint">
+                <span>Scroll to explore</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+            </div>
+        </div>
+        <div class="scroll-container">
+            <div class="cards-wrapper" id="graphics-wrapper">
+                <div class="graphics-card" data-image="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&h=1200&fit=crop" data-title="Tech Startup Rebrand" data-client="NeuralCore" data-year="2024" data-description="Complete brand identity redesign including logo, color system, typography guidelines, and 50+ branded assets.">
+                    <div class="graphics-preview">
+                        <img src="https://images.unsplash.com/photo-1558655146-364adaf1fcc9?w=800&h=1200&fit=crop" alt="Social Templates">
+                    </div>
+                    <div class="graphics-info">
+                        <h3>Social Media Templates</h3>
+                        <p class="graphics-meta"><span>Fitness Brand</span> · 2024</p>
+                    </div>
+                </div>
+
+                <div class="graphics-card" data-image="https://images.unsplash.com/photo-1634942537034-2531766767d1?w=800&h=1200&fit=crop" data-title="Product Packaging" data-client="Organic Skincare" data-year="2023" data-description="Minimal, sustainable packaging design for skincare line. Eco-friendly materials and clean aesthetic.">
+                    <div class="graphics-preview">
+                        <img src="https://images.unsplash.com/photo-1634942537034-2531766767d1?w=800&h=1200&fit=crop" alt="Packaging">
+                    </div>
+                    <div class="graphics-info">
+                        <h3>Product Packaging</h3>
+                        <p class="graphics-meta"><span>Skincare Brand</span> · 2023</p>
+                    </div>
+                </div>
+
+                <div class="graphics-card" data-image="https://images.unsplash.com/photo-1600132806608-231446b2e7af?w=800&h=1200&fit=crop" data-title="Album Artwork" data-client="Independent Artist" data-year="2024" data-description="Surreal digital artwork for indie electronic album. Dreamlike compositions and vibrant color palettes.">
+                    <div class="graphics-preview">
+                        <img src="https://images.unsplash.com/photo-1600132806608-231446b2e7af?w=800&h=1200&fit=crop" alt="Album Art">
+                    </div>
+                    <div class="graphics-info">
+                        <h3>Album Artwork</h3>
+                        <p class="graphics-meta"><span>Electronic Artist</span> · 2024</p>
+                    </div>
+                </div>
+
+                <div class="graphics-card" data-image="https://images.unsplash.com/photo-1611162616475-46b635cb6868?w=800&h=1200&fit=crop" data-title="Restaurant Menu Design" data-client="Urban Bistro" data-year="2023" data-description="Elegant menu design balancing modern aesthetics with classic fine dining presentation.">
+                    <div class="graphics-preview">
+                        <img src="https://images.unsplash.com/photo-1611162616475-46b635cb6868?w=800&h=1200&fit=crop" alt="Menu Design">
+                    </div>
+                    <div class="graphics-info">
+                        <h3>Restaurant Menu Design</h3>
+                        <p class="graphics-meta"><span>Urban Bistro</span> · 2023</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MODAL -->
+    <div class="modal" id="modal">
+        <button class="modal-close" id="modal-close">×</button>
+        <div class="modal-content" id="modal-content"></div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-cta">
+                <h3>Let's work together</h3>
+                <a href="mailto:jathnielalexnder041@gmail.com" class="footer-email">jathnielalexnder041@gmail.com</a>
+            </div>
+            <div class="social-links">
+                <a href="#" aria-label="LinkedIn">in</a>
+                <a href="#" aria-label="Behance">Be</a>
+                <a href="#" aria-label="Instagram">ig</a>
+                <a href="#" aria-label="YouTube">yt</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 KING'SMIND LABS. All rights reserved.</p>
+            <span class="back-to-top">Back to Top ↑</span>
+        </div>
+    </footer>
+
+    <script>
+        // Horizontal scroll functionality
+        function initHorizontalScroll() {
+            const sections = document.querySelectorAll('.horizontal-section');
+            
+            sections.forEach(section => {
+                const wrapper = section.querySelector('.cards-wrapper');
+                const progressBar = section.querySelector('.progress-bar');
+                const cards = wrapper.querySelectorAll('.video-card, .graphics-card');
+                
+                const totalWidth = Array.from(cards).reduce((sum, card) => {
+                    return sum + card.offsetWidth + 32;
+                }, 0) - 32;
+                
+                const maxScroll = totalWidth - window.innerWidth + 200;
+                
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            window.addEventListener('scroll', () => handleScroll(section, wrapper, progressBar, maxScroll));
+                        }
+                    });
+                }, { threshold: 0.3 });
+                
+                observer.observe(section);
+            });
+        }
+
+        function handleScroll(section, wrapper, progressBar, maxScroll) {
+            const rect = section.getBoundingClientRect();
+            const sectionTop = rect.top;
+            const sectionHeight = rect.height;
+            
+            if (sectionTop < window.innerHeight && sectionTop > -sectionHeight) {
+                const scrollProgress = Math.max(0, Math.min(1, (window.innerHeight - sectionTop) / sectionHeight));
+                const translateX = -(scrollProgress * maxScroll);
+                
+                wrapper.style.transform = `translateX(${translateX}px)`;
+                progressBar.style.width = `${scrollProgress * 100}%`;
+            }
+        }
+
+        // Modal functionality
+        const modal = document.getElementById('modal');
+        const modalContent = document.getElementById('modal-content');
+        const modalClose = document.getElementById('modal-close');
+
+        document.querySelectorAll('.video-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const videoId = card.dataset.videoId;
+                const title = card.dataset.title;
+                const category = card.dataset.category;
+                const duration = card.dataset.duration;
+                const description = card.dataset.description;
+                
+                modalContent.innerHTML = `
+                    <div class="modal-video">
+                        <iframe 
+                            src="https://www.youtube.com/embed/${videoId}?autoplay=1" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <div class="modal-info">
+                        <h2>${title}</h2>
+                        <div class="meta">
+                            <span><strong>Category:</strong> ${category}</span>
+                            <span><strong>Duration:</strong> ${duration}</span>
+                        </div>
+                        <p>${description}</p>
+                    </div>
+                `;
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        document.querySelectorAll('.graphics-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const image = card.dataset.image;
+                const title = card.dataset.title;
+                const client = card.dataset.client;
+                const year = card.dataset.year;
+                const description = card.dataset.description;
+                
+                modalContent.innerHTML = `
+                    <img src="${image}" alt="${title}" class="modal-image">
+                    <div class="modal-info">
+                        <h2>${title}</h2>
+                        <div class="meta">
+                            <span><strong>Client:</strong> ${client}</span>
+                            <span><strong>Year:</strong> ${year}</span>
+                        </div>
+                        <p>${description}</p>
+                    </div>
+                `;
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        function closeModal() {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+            setTimeout(() => {
+                modalContent.innerHTML = '';
+            }, 300);
+        }
+
+        modalClose.addEventListener('click', closeModal);
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeModal();
+        });
+
+        // Section navigation
+        document.querySelectorAll('.section-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                document.querySelectorAll('.section-link').forEach(l => l.classList.remove('active'));
+                link.classList.add('active');
+                const target = document.querySelector(link.getAttribute('href'));
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+
+        // Back to top
+        document.querySelector('.back-to-top').addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Initialize
+        if (window.innerWidth > 768) {
+            initHorizontalScroll();
+        }
+    </script>
+</body>
