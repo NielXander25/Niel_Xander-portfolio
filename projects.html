@@ -67,22 +67,6 @@
             backdrop-filter: blur(10px);
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
         }
-
-        .mobile-menu-toggle {
-    display: none;
-    flex-direction: column;
-    gap: 6px;
-    cursor: pointer;
-    z-index: 1001;
-}
-
-.mobile-menu-toggle span {
-    width: 28px;
-    height: 3px;
-    background: var(--gold-accent);
-    transition: all var(--transition-fast);
-}
-
         .logo {
             font-family: 'Montserrat', sans-serif;
             font-size: 1.25rem;
@@ -111,7 +95,20 @@
             text-decoration: none;
             color: var(--white);
         }
+        .mobile-menu-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 6px;
+    cursor: pointer;
+    z-index: 1001;
+}
 
+.mobile-menu-toggle span {
+    width: 28px;
+    height: 3px;
+    background: var(--gold-accent);
+    transition: all var(--transition-fast);
+}
         .nav a::after {
             content: '';
             position: absolute;
@@ -726,6 +723,11 @@
 <body>
     <header class="header">
         <a href="index.html" class="logo">KING'SMIND <span>LABS</span></a>
+        <div class="mobile-menu-toggle" id="mobile-menu-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
         <nav class="nav">
             <a href="index.html">Home</a>
             <a href="about.html">About</a>
@@ -744,11 +746,6 @@
             <a href="#web-projects" class="section-link">Web Design</a>
             <a href="#graphics-projects" class="section-link">Graphics</a>
         </div>
-        <div class="mobile-menu-toggle" id="mobile-menu-toggle">
-    <span></span>
-    <span></span>
-    <span></span>
-</div>
     </nav>
 
     <!-- VIDEO PROJECTS SECTION -->
@@ -1179,3 +1176,4 @@ if (mobileMenuToggle) {
 }
     </script>
 </body>
+
