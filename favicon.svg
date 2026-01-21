@@ -4,11 +4,10 @@
     x="50"
     y="62"
     text-anchor="middle"
-    font-family="Montserrat, Arial, sans-serif"
+    font-family="Arial, sans-serif"
     font-size="52"
     font-weight="800"
-    fill="#D4AF37"
-  >
+    fill="#D4AF37">
     KM
   </text>
 </svg>
