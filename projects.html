@@ -68,6 +68,21 @@
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
         }
 
+        .mobile-menu-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 6px;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+.mobile-menu-toggle span {
+    width: 28px;
+    height: 3px;
+    background: var(--gold-accent);
+    transition: all var(--transition-fast);
+}
+
         .logo {
             font-family: 'Montserrat', sans-serif;
             font-size: 1.25rem;
@@ -625,23 +640,47 @@
             color: var(--gold-hover);
         }
 
-        @media (max-width: 768px) {
-            .header,
-            .section-nav {
-                padding: 0 var(--spacing-lg);
-            }
+       @media (max-width: 768px) {
+    .logo {
+        font-size: 1rem;
+    }
 
-            .nav {
-                gap: var(--spacing-lg);
-            }
+    .mobile-menu-toggle {
+        display: flex;
+    }
 
-            .nav a {
-                font-size: 0.85rem;
-            }
+    .nav {
+        position: fixed;
+        top: 80px;
+        left: 0;
+        right: 0;
+        background: rgba(10, 10, 10, 0.98);
+        backdrop-filter: blur(10px);
+        flex-direction: column;
+        gap: 0;
+        padding: var(--spacing-lg);
+        transform: translateY(-100%);
+        opacity: 0;
+        transition: all var(--transition-fast);
+        pointer-events: none;
+        border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+    }
 
-            .section-header {
-                left: var(--spacing-lg);
-            }
+    .nav.active {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: all;
+    }
+
+    .nav a {
+        font-size: 1rem;
+        padding: var(--spacing-md) 0;
+        border-bottom: 1px solid rgba(128, 128, 128, 0.1);
+    }
+
+    .nav a::after {
+        display: none;
+    }
 
             .horizontal-section {
                 overflow-x: auto;
@@ -705,6 +744,11 @@
             <a href="#web-projects" class="section-link">Web Design</a>
             <a href="#graphics-projects" class="section-link">Graphics</a>
         </div>
+        <div class="mobile-menu-toggle" id="mobile-menu-toggle">
+    <span></span>
+    <span></span>
+    <span></span>
+</div>
     </nav>
 
     <!-- VIDEO PROJECTS SECTION -->
@@ -968,7 +1012,7 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>© 2025 KING'SMIND LABS. All rights reserved.</p>
+            <p>© 2026 KING'SMIND LABS. All rights reserved.</p>
             <span class="back-to-top">Back to Top ↑</span>
         </div>
     </footer>
@@ -1112,5 +1156,26 @@
         if (window.innerWidth > 768) {
             initHorizontalScroll();
         }
+        // Mobile menu toggle
+const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+const nav = document.getElementById('nav');
+
+if (mobileMenuToggle) {
+    mobileMenuToggle.addEventListener('click', () => {
+        nav.classList.toggle('active');
+    });
+
+    nav.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            nav.classList.remove('active');
+        });
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!nav.contains(e.target) && !mobileMenuToggle.contains(e.target)) {
+            nav.classList.remove('active');
+        }
+    });
+}
     </script>
 </body>
