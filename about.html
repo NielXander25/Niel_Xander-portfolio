@@ -7,6 +7,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="icon" href="/favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <style>
         :root {
             --black-primary: #0A0A0A;
@@ -615,7 +617,7 @@
 <body>
     <header class="header">
         <a href="index.html" class="logo">KING'SMIND <span>LABS</span></a>
-        <nav class="nav">
+        <nav id="nav" class="nav">
             <a href="index.html">Home</a>
             <a href="about.html" class="active">About</a>
             <a href="projects.html">Projects</a>
@@ -1028,7 +1030,7 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
 
-        // Mobile menu toggle
+  // Mobile menu toggle
 const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
 const nav = document.getElementById('nav');
 
@@ -1037,19 +1039,22 @@ if (mobileMenuToggle) {
         nav.classList.toggle('active');
     });
 
+    // Close menu when clicking on a link
     nav.querySelectorAll('a').forEach(link => {
         link.addEventListener('click', () => {
             nav.classList.remove('active');
         });
     });
 
+    // Close menu when clicking outside
     document.addEventListener('click', (e) => {
         if (!nav.contains(e.target) && !mobileMenuToggle.contains(e.target)) {
             nav.classList.remove('active');
         }
     });
-}CSSContainerRule
+}
     </script>
 </body>
 </html>
+
 
