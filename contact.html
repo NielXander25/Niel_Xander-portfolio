@@ -600,7 +600,7 @@
             // If using Formspree, it handles submission automatically
             // Add custom success message or redirect here if needed
         });
-        // Mobile menu toggle
+// Mobile menu toggle
 const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
 const nav = document.getElementById('nav');
 
@@ -609,12 +609,14 @@ if (mobileMenuToggle) {
         nav.classList.toggle('active');
     });
 
+    // Close menu when clicking on a link
     nav.querySelectorAll('a').forEach(link => {
         link.addEventListener('click', () => {
             nav.classList.remove('active');
         });
     });
 
+    // Close menu when clicking outside
     document.addEventListener('click', (e) => {
         if (!nav.contains(e.target) && !mobileMenuToggle.contains(e.target)) {
             nav.classList.remove('active');
@@ -624,5 +626,6 @@ if (mobileMenuToggle) {
     </script>
 </body>
 </html>
+
 
 
